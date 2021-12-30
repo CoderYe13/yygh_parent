@@ -5,4 +5,4 @@ buildSrc/build
 /spring-*/build
 /src/asciidoc/build
 target/
-
+*.iml
