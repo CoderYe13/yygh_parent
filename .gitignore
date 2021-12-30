@@ -1,0 +1,8 @@
+.idea
+classes/
+/build
+buildSrc/build
+/spring-*/build
+/src/asciidoc/build
+target/
+
