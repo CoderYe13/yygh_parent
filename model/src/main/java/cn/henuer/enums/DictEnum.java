@@ -1,4 +1,4 @@
-package  cn.henuer.enums;
+package cn.henuer.enums;
 
 public enum DictEnum {
 
