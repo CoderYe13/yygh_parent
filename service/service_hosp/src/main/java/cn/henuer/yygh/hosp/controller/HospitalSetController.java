@@ -53,23 +53,28 @@ public class HospitalSetController {
                                    @PathVariable("limit") Long limit,
                                    @RequestBody(required = false) HospitalSetQueryVo hospitalSetQueryVo,
                                    HttpServletResponse response) {
-        //创建page对象，传递当前页，和每页记录数
-        Page<HospitalSet> page = new Page<>(current, limit);
-        QueryWrapper<HospitalSet> wrapper = new QueryWrapper<>();
-        String hosname = hospitalSetQueryVo.getHosname();
-        String hoscode = hospitalSetQueryVo.getHoscode();
-        //条件判空
-        if (!StringUtils.isEmpty(hosname)) {
-            wrapper.like("hosname", hospitalSetQueryVo.getHosname());
+        if (current>0&&limit>0){
+            //创建page对象，传递当前页，和每页记录数
+            Page<HospitalSet> page = new Page<>(current, limit);
+            QueryWrapper<HospitalSet> wrapper = new QueryWrapper<>();
+            String hosname = hospitalSetQueryVo.getHosname();
+            String hoscode = hospitalSetQueryVo.getHoscode();
+            //条件判空
+            if (!StringUtils.isEmpty(hosname)) {
+                wrapper.like("hosname", hospitalSetQueryVo.getHosname());
+            }
+
+            if (hoscode != null && !hoscode.equals("")) {
+                wrapper.eq("hoscode", hospitalSetQueryVo.getHoscode());
+            }
+            //调用方法实现分页查询
+            Page<HospitalSet> hospitalSetPage = hospitalSetService.page(page, wrapper);
+            response.addHeader("henu", "henu");
+            return Result.ok(hospitalSetPage);
+        }else {
+            return Result.fail("请输入正确参数");
         }
 
-        if (hoscode != null && !hoscode.equals("")) {
-            wrapper.eq("hoscode", hospitalSetQueryVo.getHoscode());
-        }
-        //调用方法实现分页查询
-        Page<HospitalSet> hospitalSetPage = hospitalSetService.page(page, wrapper);
-        response.addHeader("henu", "henu");
-        return Result.ok(hospitalSetPage);
     }
 
     //添加医院设置
@@ -125,4 +130,28 @@ public class HospitalSetController {
        return Result.fail();
     }
 
+    //添加医院设置
+    @ApiOperation("医院设置锁定和解锁")
+    @PutMapping("lockHospitalSet/{id}/{status}")
+    public Result lockHospitalSet(@PathVariable("id") Long id,
+                                 @PathVariable("status")Integer status ) {
+        //根据id获取医院设置
+        HospitalSet hospitalSet = hospitalSetService.getById(id);
+        //设置状态
+        hospitalSet.setStatus(status);
+        //修改状态
+        hospitalSetService.updateById(hospitalSet);
+
+        return Result.ok();
+    }
+    @ApiOperation("医院设置锁定和解锁")
+    @PutMapping("sendKey/{id}")
+    public Result sendKey(@PathVariable("id") Long id) {
+
+        HospitalSet hospitalSet = hospitalSetService.getById(id);
+        String signKey = hospitalSet.getSignKey();
+        String hoscode = hospitalSet.getHoscode();
+        //TODO
+        return Result.ok();
+    }
 }
