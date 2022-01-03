@@ -6,3 +6,5 @@ buildSrc/build
 /src/asciidoc/build
 target/
 *.iml
+vue-admin-template-master/
+

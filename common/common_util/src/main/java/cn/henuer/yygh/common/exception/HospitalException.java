@@ -1,8 +1,8 @@
 package cn.henuer.yygh.common.exception;
 
+import cn.henuer.yygh.common.result.ResultCodeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import jw.hospital.common.result.ResultCodeEnum;
 import lombok.Data;
 
 /**
