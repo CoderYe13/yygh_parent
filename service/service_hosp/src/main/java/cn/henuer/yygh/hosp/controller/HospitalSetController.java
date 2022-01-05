@@ -99,8 +99,8 @@ public class HospitalSetController {
 
     //添加医院设置
     @ApiOperation("根据id获取医院设置信息")
-    @PostMapping("getHospSet/{id}")
-    public Result getHospSet(@PathVariable("{id}") Long id) {
+    @GetMapping("getHospSet/{id}")
+    public Result getHospSet(@PathVariable Long id) {
         if (id > 0) {
             HospitalSet hospitalSet = hospitalSetService.getById(id);
             return Result.ok(hospitalSet);
