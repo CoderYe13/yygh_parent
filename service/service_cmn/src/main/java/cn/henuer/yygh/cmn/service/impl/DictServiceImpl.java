@@ -1,17 +1,20 @@
 package cn.henuer.yygh.cmn.service.impl;
 
 import cn.henuer.model.cmn.Dict;
+import cn.henuer.vo.cmn.DictEeVo;
+import cn.henuer.yygh.cmn.listener.DictListener;
 import cn.henuer.yygh.cmn.mapper.DictMapper;
 import cn.henuer.yygh.cmn.service.DictService;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements DictService {
@@ -33,7 +36,6 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 
         return dictList;
     }
-
     //判断id下面时候有子节点
     private boolean isChildren(Long id) {
         QueryWrapper<Dict> wrapper = new QueryWrapper<>();
@@ -45,4 +47,26 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
             return false;
         }
     }
+    @Override
+    public void exportDictData(HttpServletResponse response) {
+
+    }
+
+    @Override
+    public void importDictData(MultipartFile file) {
+
+    }
+
+    @Override
+    public String getDictName(String dictCode, String value) {
+        return null;
+    }
+
+    @Override
+    public List<Dict> findByDictCode(String dictCode) {
+        return null;
+    }
+
+
+
 }

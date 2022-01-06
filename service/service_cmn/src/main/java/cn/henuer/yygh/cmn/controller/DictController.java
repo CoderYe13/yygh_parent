@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Api("数据字典接口")
@@ -20,6 +22,13 @@ public class DictController {
 
     @Autowired
     private DictService dictService;
+
+    //导出数据字典接口，使用response输出
+    @GetMapping("exportData")
+    public Result exportDict(HttpServletResponse response){
+        dictService.exportDictData(response);
+        return Result.ok();
+    }
 
     //根据数据id查询子查询数据列表
     @ApiOperation("根据数据id查询子查询列表")
