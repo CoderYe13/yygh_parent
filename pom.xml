@@ -12,8 +12,8 @@
         <module>common</module>
         <module>model</module>
         <module>service</module>
+        <module>service_client</module>
     </modules>
-
     <properties>
         <java.version>1.8</java.version>
         <cloud.version>Hoxton.RELEASE</cloud.version>

@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -59,7 +60,28 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 
     @Override
     public String getDictName(String dictCode, String value) {
-        return null;
+        //如果dictcode为null，那么直接通过value查询
+        if (StringUtils.isEmpty(dictCode)){
+            QueryWrapper wrapper=new QueryWrapper();
+            wrapper.eq("value",value);
+            Dict dict=baseMapper.selectOne(wrapper);
+            return dict.getName();
+        }else{
+            //如果dictCode不为null，根据dictCode和value查询
+            Dict codeDict=this.getDictByDictCode(dictCode);
+            Long parent_id=codeDict.getId();
+            //根据parent_id和value查询唯一的dict
+           Dict finalDict= baseMapper.selectOne(new QueryWrapper<Dict>()
+            .eq("dict_code",dictCode).eq("value",value));
+           return finalDict.getName();
+        }
+
+    }
+    private Dict getDictByDictCode(String dictCode){
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.eq("dict_code",dictCode);
+        Dict dict=baseMapper.selectOne(wrapper);
+        return dict;
     }
 
     @Override
