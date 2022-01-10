@@ -29,7 +29,7 @@
         <oss.version>3.10.2</oss.version>
         <jodatime.version>2.10.1</jodatime.version>
         <lombok.version>1.18.4</lombok.version>
-        <spring.boot.version>2.1.16.RELEASE</spring.boot.version>
+        <spring.boot.version>2.2.2.RELEASE</spring.boot.version>
     </properties>
 
     <!--配置dependencyManagement锁定依赖的版本-->
