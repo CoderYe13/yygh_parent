@@ -16,6 +16,7 @@ public class HospitalServiceImpl implements HospitalService {
     @Autowired
     private HospitalRepository hospitalRepository;
     //上传医院信息到mongo
+    @Override
     public void save(Map<String, Object> paramMap) {
         //把参数map转换成hospital对象
         String mapString= JSONObject.toJSONString(paramMap);
@@ -25,11 +26,11 @@ public class HospitalServiceImpl implements HospitalService {
         Hospital hospitalExist=hospitalRepository.getHospitalByHoscode(hoscode);
         //如果不存在，进行添加
         if(hospitalExist!=null){
-            hospital.setStatus(hospitalExist.getStatus());
-            hospital.setIsDeleted(0);
-            hospital.setCreateTime(hospitalExist.getCreateTime());
-            hospital.setUpdateTime(new Date());
-            hospitalRepository.save(hospital);
+            hospitalExist.setStatus(hospitalExist.getStatus());
+            hospitalExist.setIsDeleted(0);
+            hospitalExist.setCreateTime(hospitalExist.getCreateTime());
+            hospitalExist.setUpdateTime(new Date());
+            hospitalRepository.save(hospitalExist);
         }
         else {
             hospital.setStatus(0);

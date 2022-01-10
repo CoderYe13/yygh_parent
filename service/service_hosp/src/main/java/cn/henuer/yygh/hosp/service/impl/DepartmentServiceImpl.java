@@ -11,7 +11,6 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -30,9 +29,9 @@ public class DepartmentServiceImpl implements DepartmentService {
         Department departmentExist=departmentRepository.getDepartmentByHoscodeAndDepcode(department.getHoscode(),department.getDepcode());
         //判断科室时候存在
         if (departmentExist!=null){
-            department.setUpdateTime(new Date());
-            department.setIsDeleted(0);
-            departmentRepository.save(department);
+            departmentExist.setUpdateTime(new Date());
+            departmentExist.setIsDeleted(0);
+            departmentRepository.save(departmentExist);
         }else{
             department.setCreateTime(new Date());
             department.setUpdateTime(new Date());
