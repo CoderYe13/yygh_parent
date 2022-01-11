@@ -4,6 +4,7 @@ import cn.henuer.model.hosp.Hospital;
 import cn.henuer.vo.hosp.HospitalQueryVo;
 import cn.henuer.yygh.common.result.Result;
 import cn.henuer.yygh.hosp.service.HospitalService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,5 +26,14 @@ public class HospitalController {
         Page<Hospital> pageModel= hospitalService.selectHospPage(page,limit,hospitalQueryVo);
 
         return Result.ok(pageModel);
+    }
+
+    //更新医院上线信息
+    @ApiOperation("更新医院上线状态")
+    @GetMapping("updateHospStatus/{id}/{status}")
+    public Result updateHospStatus(@PathVariable String id,
+                                   @PathVariable Integer status){
+        hospitalService.updataStatus(id,status);
+        return Result.ok();
     }
 }

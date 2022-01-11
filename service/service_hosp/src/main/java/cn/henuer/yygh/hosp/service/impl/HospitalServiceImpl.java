@@ -81,6 +81,7 @@ public class HospitalServiceImpl implements HospitalService {
         return pages;
     }
 
+
     //获取查询list集合，遍历进行医院等级封装在parma参数中
     private Hospital setHospitalHosType(Hospital hospital) {
         //根据dictcode和value获取医院等级信息
@@ -94,5 +95,17 @@ public class HospitalServiceImpl implements HospitalService {
         hospital.getParam().put("hostypeString", hostypeString);
         hospital.getParam().put("fullAddress",provinceString+cityString+districtString);
         return hospital;
+    }
+
+    //更新医院上线信息
+    @Override
+    public void updataStatus(String id, Integer status) {
+        //根据id查询医院信息
+        Hospital hospital=hospitalRepository.findById(id).get();
+
+        hospital.setStatus(status);
+        hospital.setUpdateTime(new Date());
+        //设置医院状态值
+        hospitalRepository.save(hospital);
     }
 }
