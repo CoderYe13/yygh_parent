@@ -2,8 +2,10 @@ package cn.henuer.yygh.hosp.service;
 
 import cn.henuer.model.hosp.Department;
 import cn.henuer.vo.hosp.DepartmentQueryVo;
+import cn.henuer.vo.hosp.DepartmentVo;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Map;
 
 public interface DepartmentService {
@@ -14,4 +16,6 @@ public interface DepartmentService {
     Page<Department> findPageDepartment(int page, int limit, DepartmentQueryVo departmentQueryVo);
     //删除科室接口
     void remove(String hoscode, String depcode);
+
+    List<DepartmentVo> findDeptTree(String hoscode);
 }
