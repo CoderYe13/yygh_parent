@@ -15,4 +15,6 @@ public interface HospitalService {
     Page<Hospital> selectHospPage(Integer page, Integer limit, HospitalQueryVo hospitalQueryVo);
 
     void updataStatus(String id, Integer status);
+
+    Map<String,Object> getHospById(String id);
 }
