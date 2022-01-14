@@ -103,7 +103,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 
             //封装小科室
             List<DepartmentVo> childrenDeptList=new ArrayList<>();
-
+            /**
+             * collect(Collectors.toList());stream需要加上终止操作，要不然其中的内部操作无效
+             */
             department1List.stream().map((item)->{
                 DepartmentVo childDept=new DepartmentVo();
                 childDept.setDepcode(item.getDepcode());
