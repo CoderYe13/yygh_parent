@@ -124,4 +124,13 @@ public class HospitalServiceImpl implements HospitalService {
         hospital.setBookingRule(null);
         return result;
     }
+
+    @Override
+    public String getHospName(String hoscode) {
+        Hospital hospital = hospitalRepository.getHospitalByHoscode(hoscode);
+        if (hospital!=null){
+            return hospital.getHosname();
+        }
+        return null;
+    }
 }
