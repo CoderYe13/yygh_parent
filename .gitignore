@@ -7,4 +7,5 @@ buildSrc/build
 target/
 *.iml
 vue-admin-template-master/
+user/
 
